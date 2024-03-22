@@ -45,11 +45,11 @@ jobs:
     steps:
       - id: wow
         run: |
-        echo "what is this"
-        echo "[ERROR] ${{ github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV }}"
-        echo "[ERROR] ${{ github.env.DEPLOY_TARGET_CLIENT_ALL_ENV }}"
-        echo "[ERROR] ${{ github.env.DEPLOY_ALL_CLIENT_TARGET_ENV }}"
-        echo "[ERROR] ${{ github.env.DEPLOY_ALL_CLIENT_ALL_ENV }}"
+          echo "what is this"
+          echo "[ERROR] ${{ github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV }}"
+          echo "[ERROR] ${{ github.env.DEPLOY_TARGET_CLIENT_ALL_ENV }}"
+          echo "[ERROR] ${{ github.env.DEPLOY_ALL_CLIENT_TARGET_ENV }}"
+          echo "[ERROR] ${{ github.env.DEPLOY_ALL_CLIENT_ALL_ENV }}"
 
   # mlops_deploy_target_client_target_env:
   #   runs-on: ubuntu-latest
