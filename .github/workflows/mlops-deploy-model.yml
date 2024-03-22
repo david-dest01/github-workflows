@@ -55,6 +55,39 @@ jobs:
           echo "DEPLOY_ALL_CLIENT_TARGET_ENV >> $DEPLOY_ALL_CLIENT_TARGET_ENV"
           echo "DEPLOY_ALL_CLIENT_ALL_ENV >> $DEPLOY_ALL_CLIENT_ALL_ENV"
 
+  DEPLOY_TARGET_CLIENT_TARGET_ENV:
+    runs-on: ubuntu-latest
+    if: ${{ github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV }}
+    steps:
+      - id: deploy-conditions
+        run: |
+          echo "in DEPLOY_TARGET_CLIENT_TARGET_ENV"
+
+  DEPLOY_TARGET_CLIENT_ALL_ENV:
+    runs-on: ubuntu-latest
+    if: ${{ github.env.DEPLOY_TARGET_CLIENT_ALL_ENV }}
+    steps:
+      - id: deploy-conditions
+        run: |
+          echo "in DEPLOY_TARGET_CLIENT_ALL_ENV"     
+
+  DEPLOY_ALL_CLIENT_TARGET_ENV:
+    runs-on: ubuntu-latest
+    if: ${{ github.env.DEPLOY_ALL_CLIENT_TARGET_ENV }}
+    steps:
+      - id: deploy-conditions
+        run: |
+          echo "in DEPLOY_ALL_CLIENT_TARGET_ENV"    
+
+  DEPLOY_ALL_CLIENT_ALL_ENV:
+    runs-on: ubuntu-latest
+    if: ${{ github.env.DEPLOY_ALL_CLIENT_ALL_ENV }}
+    steps:
+      - id: deploy-conditions
+        run: |
+          echo "in DEPLOY_ALL_CLIENT_ALL_ENV"                              
+          
+
   # mlops_deploy_target_client_target_env:
   #   runs-on: ubuntu-latest
   #   if: ${{ github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV }}
