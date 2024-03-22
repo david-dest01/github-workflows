@@ -1,0 +1,41 @@
+name: MLOPS - Scoring Deployment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+
+  DEPLOY_TARGET_CLIENT_TARGET_ENV:
+    uses: ./.github/workflows/mlops-deploy-model.yml
+    secrets: inherit
+    with: 
+      client: cna
+      environment: development
+      image_tag: ${{ github.sha }}  
+
+  DEPLOY_TARGET_CLIENT_ALL_ENV:
+    uses: ./.github/workflows/mlops-deploy-model.yml
+    secrets: inherit
+    with: 
+      client: cna
+      environment: all
+      image_tag: ${{ github.sha }}       
+
+  DEPLOY_ALL_CLIENT_TARGET_ENV:
+    uses: ./.github/workflows/mlops-deploy-model.yml
+    secrets: inherit
+    with: 
+      client: all
+      environment: development
+      image_tag: ${{ github.sha }}          
+
+  DEPLOY_ALL_CLIENT_ALL_ENV:
+    uses: ./.github/workflows/mlops-deploy-model.yml
+    secrets: inherit
+    with: 
+      client: all
+      environment: all
+      image_tag: ${{ github.sha }}                    
