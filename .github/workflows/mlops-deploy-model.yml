@@ -57,7 +57,7 @@ jobs:
 
   DEPLOY_TARGET_CLIENT_TARGET_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV
+    if: ${{ github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV == 'true' }}
     steps:
       - id: deploy-conditions
         run: |
@@ -65,7 +65,7 @@ jobs:
 
   DEPLOY_TARGET_CLIENT_ALL_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_TARGET_CLIENT_ALL_ENV
+    if: ${{ github.env.DEPLOY_TARGET_CLIENT_ALL_ENV == 'true' }}
     steps:
       - id: deploy-conditions
         run: |
@@ -73,7 +73,7 @@ jobs:
 
   DEPLOY_ALL_CLIENT_TARGET_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_ALL_CLIENT_TARGET_ENV
+    if: ${{ github.env.DEPLOY_ALL_CLIENT_TARGET_ENV == 'true' }}
     steps:
       - id: deploy-conditions
         run: |
@@ -81,7 +81,7 @@ jobs:
 
   DEPLOY_ALL_CLIENT_ALL_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_ALL_CLIENT_ALL_ENV
+    if: ${{ github.env.DEPLOY_ALL_CLIENT_ALL_ENV == 'true' }}
     steps:
       - id: deploy-conditions
         run: |
