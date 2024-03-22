@@ -33,23 +33,24 @@ on:
         required: true
         type: string
 
-env:
-  DEPLOY_TARGET_CLIENT_TARGET_ENV: ${{ inputs.client != 'all' && inputs.environment != 'all' }} 
-  DEPLOY_TARGET_CLIENT_ALL_ENV: ${{ inputs.client != 'all' && inputs.environment == 'all' }}
-  DEPLOY_ALL_CLIENT_TARGET_ENV: ${{ inputs.client == 'all' && inputs.environment != 'all' }}
-  DEPLOY_ALL_CLIENT_ALL_ENV: ${{ inputs.client == 'all' && inputs.environment == 'all' }}
+env: 
+  DEPLOY_ALL_CLIENT_ALL_ENV: |
+    ${{ github.events.inputs.client != 'all' && github.events.inputs.environment != 'all' }}
+  DEPLOY_TARGET_CLIENT_ALL_ENV: |
+    ${{ github.events.inputs.client != 'all' && github.events.inputs.environment == 'all' }}
+  DEPLOY_ALL_CLIENT_TARGET_ENV: |
+    ${{ github.events.inputs.client == 'all' && github.events.inputs.environment != 'all' }}
+  DEPLOY_ALL_CLIENT_ALL_ENV: |
+    ${{ github.events.inputs.client == 'all' && github.events.inputs.environment == 'all' }}
 
 jobs:
-  mlops_deploy_target_client_all_env:
+
+  deploy_conditions:
     runs-on: ubuntu-latest
     steps:
-      - id: wow
+      - id: deploy-conditions
         run: |
-          echo "what is this"
-          echo "[INFO] ${{ vars.DEPLOY_TARGET_CLIENT_TARGET_ENV }}"
-          # echo "[INFO] ${{ vars.DEPLOY_TARGET_CLIENT_ALL_ENV }}"
-          # echo "[INFO] ${{ vars.DEPLOY_ALL_CLIENT_TARGET_ENV }}"
-          # echo "[INFO] ${{ vars.DEPLOY_ALL_CLIENT_ALL_ENV }}"
+          echo "DEPLOY_ALL_CLIENT_ALL_ENV >> $DEPLOY_ALL_CLIENT_ALL_ENV"
 
   # mlops_deploy_target_client_target_env:
   #   runs-on: ubuntu-latest
