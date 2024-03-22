@@ -43,7 +43,8 @@ jobs:
   mlops_deploy_target_client_all_env:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - id: wow
+        run: |
         echo "what is this"
         echo "[ERROR] ${{ github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV }}"
         echo "[ERROR] ${{ github.env.DEPLOY_TARGET_CLIENT_ALL_ENV }}"
