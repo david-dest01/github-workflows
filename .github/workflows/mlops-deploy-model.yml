@@ -78,7 +78,7 @@ jobs:
   DEPLOY_TARGET_CLIENT_ALL_ENV:
     runs-on: ubuntu-latest
     needs: deploy_conditions
-    if: needs.deploy_conditions.outputs.deploy-target-client-target-env == 'true'
+    if: needs.deploy_conditions.outputs.deploy-target-client-all-env == 'true'
     steps:
       - id: deploy-conditions
         run: |
