@@ -50,6 +50,9 @@ jobs:
     steps:
       - id: deploy-conditions
         run: |
+          echo "DEPLOY_TARGET_CLIENT_TARGET_ENV >> $DEPLOY_TARGET_CLIENT_TARGET_ENV"
+          echo "DEPLOY_TARGET_CLIENT_ALL_ENV >> $DEPLOY_TARGET_CLIENT_ALL_ENV"
+          echo "DEPLOY_ALL_CLIENT_TARGET_ENV >> $DEPLOY_ALL_CLIENT_TARGET_ENV"
           echo "DEPLOY_ALL_CLIENT_ALL_ENV >> $DEPLOY_ALL_CLIENT_ALL_ENV"
 
   # mlops_deploy_target_client_target_env:
