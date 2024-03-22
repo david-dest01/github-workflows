@@ -47,17 +47,29 @@ jobs:
 
   deploy_conditions:
     runs-on: ubuntu-latest
+    outputs:
+      deploy-target-client-target-env: ${{ steps.deploy-target-client-target-env.outputs.value }}
+      deploy-target-client-all-env: ${{ steps.deploy-target-client-all-env.outputs.value }}
+      deploy-all-client-target-env: ${{ steps.deploy-all-client-target-env.outputs.value }}
+      deploy-all-client-all-env: ${{ steps.deploy-all-client-all-env.outputs.value }}
     steps:
-      - id: deploy-conditions
+      - id: deploy-target-client-target-env
         run: |
-          echo "DEPLOY_TARGET_CLIENT_TARGET_ENV >> $DEPLOY_TARGET_CLIENT_TARGET_ENV"
-          echo "DEPLOY_TARGET_CLIENT_ALL_ENV >> $DEPLOY_TARGET_CLIENT_ALL_ENV"
-          echo "DEPLOY_ALL_CLIENT_TARGET_ENV >> $DEPLOY_ALL_CLIENT_TARGET_ENV"
-          echo "DEPLOY_ALL_CLIENT_ALL_ENV >> $DEPLOY_ALL_CLIENT_ALL_ENV"
+          echo ::set-output name=value::${{ inputs.client != 'all' && inputs.environment != 'all' }}
+      - id: deploy-target-client-all-env
+        run: |
+          echo ::set-output name=value::${{ inputs.client != 'all' && inputs.environment == 'all' }}
+      - id: deploy-all-client-target-env
+        run: |
+          echo ::set-output name=value::${{ github.events.inputs.client == 'all' && github.events.inputs.environment != 'all' }}
+      - id: deploy-all-client-all-env
+        run: |
+          echo ::set-output name=value::${{ inputs.client == 'all' && inputs.environment == 'all' }}
 
   DEPLOY_TARGET_CLIENT_TARGET_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_TARGET_CLIENT_TARGET_ENV == 'true'
+    needs: deploy_conditions
+    if: needs.deploy_conditions.outputs.deploy-target-client-target-env == 'true'
     steps:
       - id: deploy-conditions
         run: |
@@ -65,7 +77,8 @@ jobs:
 
   DEPLOY_TARGET_CLIENT_ALL_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_TARGET_CLIENT_ALL_ENV == 'true'
+    needs: deploy_conditions
+    if: needs.deploy_conditions.outputs.deploy-target-client-target-env == 'true'
     steps:
       - id: deploy-conditions
         run: |
@@ -73,7 +86,8 @@ jobs:
 
   DEPLOY_ALL_CLIENT_TARGET_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_ALL_CLIENT_TARGET_ENV == 'true'
+    needs: deploy_conditions
+    if: needs.deploy_conditions.outputs.deploy-all-client-target-env == 'true'
     steps:
       - id: deploy-conditions
         run: |
@@ -81,7 +95,8 @@ jobs:
 
   DEPLOY_ALL_CLIENT_ALL_ENV:
     runs-on: ubuntu-latest
-    if: github.env.DEPLOY_ALL_CLIENT_ALL_ENV == 'true'
+    needs: deploy_conditions
+    if: needs.deploy_conditions.outputs.deploy-all-client-all-env == 'true'
     steps:
       - id: deploy-conditions
         run: |
