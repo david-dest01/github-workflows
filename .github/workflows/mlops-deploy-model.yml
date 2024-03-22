@@ -34,7 +34,7 @@ on:
         type: string
 
 env: 
-  DEPLOY_ALL_CLIENT_ALL_ENV: |
+  DEPLOY_TARGET_CLIENT_TARGET_ENV: |
     ${{ github.events.inputs.client != 'all' && github.events.inputs.environment != 'all' }}
   DEPLOY_TARGET_CLIENT_ALL_ENV: |
     ${{ github.events.inputs.client != 'all' && github.events.inputs.environment == 'all' }}
