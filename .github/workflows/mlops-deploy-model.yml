@@ -61,7 +61,7 @@ jobs:
           echo ::set-output name=value::${{ inputs.client != 'all' && inputs.environment == 'all' }}
       - id: deploy-all-client-target-env
         run: |
-          echo ::set-output name=value::${{ github.events.inputs.client == 'all' && github.events.inputs.environment != 'all' }}
+          echo ::set-output name=value::${{ inputs.client == 'all' && inputs.environment != 'all' }}
       - id: deploy-all-client-all-env
         run: |
           echo ::set-output name=value::${{ inputs.client == 'all' && inputs.environment == 'all' }}
