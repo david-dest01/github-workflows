@@ -33,18 +33,7 @@ on:
         required: true
         type: string
 
-env: 
-  DEPLOY_TARGET_CLIENT_TARGET_ENV: |
-    ${{ github.events.inputs.client != 'all' && github.events.inputs.environment != 'all' }}
-  DEPLOY_TARGET_CLIENT_ALL_ENV: |
-    ${{ github.events.inputs.client != 'all' && github.events.inputs.environment == 'all' }}
-  DEPLOY_ALL_CLIENT_TARGET_ENV: |
-    ${{ github.events.inputs.client == 'all' && github.events.inputs.environment != 'all' }}
-  DEPLOY_ALL_CLIENT_ALL_ENV: |
-    ${{ github.events.inputs.client == 'all' && github.events.inputs.environment == 'all' }}
-
 jobs:
-
   deploy_conditions:
     runs-on: ubuntu-latest
     outputs:
@@ -70,6 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy_conditions
     if: needs.deploy_conditions.outputs.deploy-target-client-target-env == 'true'
+    environment: ${{ inputs.environment }}
     steps:
       - id: deploy-conditions
         run: |
